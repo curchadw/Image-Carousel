@@ -17,22 +17,73 @@ export default class DoubleLinkedList {
    * Push a new value to the tail of the linked list.
    */
 
-  push(value) {}
+  push(val){
+      let node = new Node(val)
+      
+      if (!this.head || !this.tail){
+       this.head = node
+       this.tail = node
+      //  this.size++
+       this.length = 1
+      }else{
+        this.tail.next = node
+        node.prev = this.tail
+        this.tail = node
+        this.length++
+      }
+    }
 
   /**
    * Remove an item from the end of the linked list.
    */
-  pop() {}
+  pop() {
 
+    let node = this.tail
+    
+    if(this.length === 1){
+      this.head = null
+      this.tail = null
+      this.length--
+    }
+
+    if(this.tail){
+      this.tail = this.tail.prev
+      this.tail.next = null
+      this.length--
+      // this.tail.prev.next = null
+    }
+  }
   /**
    * Remove a node from the beginning of the list.
    */
-  shift() {}
+  shift() {
+    if(!this.head){
+      return null
+    }else{
+      this.head = this.head.next
+      this.head.prev = null
+    }
+
+    
+    }
+
 
   /**
    * Add a node to the head of the linked list.
    */
-  unshift(value) {}
+  unshift(val) {
+      const node = new Node(val)
+
+      if(!this.head){
+        this.head = node
+        this.tail = node
+      }else{
+        this.head.prev = node
+        node.next = this.head
+        this.head = node
+      }
+    }
+  
 
   /**
    * Get a Node at a specific index
