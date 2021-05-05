@@ -100,7 +100,7 @@ export default class DoubleLinkedList {
         
       }
 
-      return false
+      return null
  
   }
 
@@ -108,29 +108,55 @@ export default class DoubleLinkedList {
    * Set a node at a specific index.
    */
   setNodeAtIndex(index, value) {
-    let current = this.head
-    let currVal = null
-    let count = 0
-    while (current != null){
-      if (current.index == index){
-        currVal = value
-      }
-      count++
-      current = current.next
-    }
-    return false
+   if (this.getNodeAtIndex(index).value === value){
+     return value
+   }
 
+    return false
   }
 
   /**
    *  Insert a node at a specific index.
    */
-  insertAtIndex(index, val) {}
+  insertAtIndex(index, val) {
+    if (!this.head && !this.tail){
+      this.head = new Node(val)
+    }
+
+    //if new node needs to be inserted at the beginning in front of head
+    if (index === 0){
+      this.head = new Node(val)
+    }
+
+    const prev = this.getNodeAtIndex(index)
+    let newNode = new Node(val)
+    newNode.next = prev.next
+    prev.next = newNode
+    this.length++
+
+    return this.head
+
+  }
 
   /**
    * Remove a node at a specific index.
    */
-  removeAtIndex(index) {}
+  removeAtIndex(index) {
+    if (index === 0){
+      return this.shift()
+    }else if (index === index.length - 1){
+      return this.pop()
+    }else{
+      let current = this.getNodeAtIndex(index)
+      current.prev.next = current.next
+      current.next.prev = current.prev
+      this.length--
+      current.next = null
+      current.prev = null
+
+      return this
+    }
+  }
 }
 
 
