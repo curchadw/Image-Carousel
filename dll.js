@@ -88,12 +88,39 @@ export default class DoubleLinkedList {
   /**
    * Get a Node at a specific index
    */
-  getNodeAtIndex(index) {}
+  getNodeAtIndex(index) {
+    let current = this.head
+    let count = 0
+    while (current != null){
+        if (current.index === index){
+          return count
+        }
+          count++
+          current = current.next
+        
+      }
+
+      return false
+ 
+  }
 
   /**
    * Set a node at a specific index.
    */
-  setNodeAtIndex(index, value) {}
+  setNodeAtIndex(index, value) {
+    let current = this.head
+    let currVal = null
+    let count = 0
+    while (current != null){
+      if (current.index == index){
+        currVal = value
+      }
+      count++
+      current = current.next
+    }
+    return false
+
+  }
 
   /**
    *  Insert a node at a specific index.
@@ -105,3 +132,5 @@ export default class DoubleLinkedList {
    */
   removeAtIndex(index) {}
 }
+
+
